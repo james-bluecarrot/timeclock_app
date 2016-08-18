@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="home">
+
+  <button *ngIf="!user.uid" (click)="googleLogin()">Login with Google Plus</button>
+  <button *ngIf="!user.uid" (click)="googleLogin2()">Login with Google Web</button>  
+
+  <ion-card *ngIf="user.uid">
+    <ion-card-header >
+      {{user.displayName}}
+    </ion-card-header>
+    <ion-card-content>
+      <button secondary>Log Time</button>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
