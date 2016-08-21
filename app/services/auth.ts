@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+// import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { InAppBrowser } from 'ionic-native';
 
@@ -6,13 +7,45 @@ import { InAppBrowser } from 'ionic-native';
 export class Auth {
 
   user: { displayName: string, uid: string };
+  token: Object;
 
   constructor() {
-    this.user = window.localStorage.getItem('user') ? window.localStorage.getItem('user') : this.emptyUser();
+    this.user = this.emptyUser();
   }
 
   emptyUser() {
     return { displayName: '', uid: '' };
+  }
+
+  loginWithGoogleviaWeb() {
+    // build authUrl:
+    var authBase = 'https://accounts.google.com/o/oauth2/v2/auth';
+    var authParams = {
+      response_type: 'token',
+      client_id: '707132267777-vc058hae0nrsduarpe5uilggt96ha2oo.apps.googleusercontent.com',
+      redirect_uri: window.location.origin,
+      scope: ['email', 'openid'].join(' ')
+    };
+    var params = [];
+    for (var k in authParams) {
+      params.push(k + '=' + authParams[k]);
+    }
+    var authUrl = authBase + '?' + params.join('&');
+    window.open(authUrl, '_self');
+  }
+
+  // TODO: move this to Token constructor?  Token(location.hash)
+  parseToken() {
+    this.token = {
+      created: new Date().getTime()
+    }
+    var parmStr = location.hash.substring(1); // strip leading hash
+    var parms = parmStr.split('&');
+    for (var i in parms) {
+      var kv = parms[i].split('=');
+      this.token[kv[0]] = kv[1];
+    }
+    console.log(this.token);
   }
 
   loginWithGoogleUsingPlugin() {

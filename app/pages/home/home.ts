@@ -26,12 +26,12 @@ export class HomePage {
   }
 
   googleLogin2(credentials) {
-    this.auth.loginWithGoogleUsingWeb().subscribe(user => {
+    this.auth.loginWithGoogleviaWeb()/*.subscribe(user => {
       console.log(user);
       this.user.displayName = user.auth.displayName;
       this.user.uid = user.auth.uid;
       window.localStorage.setItem('user', JSON.stringify(this.auth.user));
-    });
+    });*/
   }
 
 }

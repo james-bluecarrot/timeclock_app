@@ -38,7 +38,7 @@ class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, private auth: Auth) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -53,6 +53,12 @@ class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+      if (window.location.hash.match(/^#access_token/) && !this.auth.token) {
+        this.auth.parseToken();
+      } else if (this.auth.token) {
+        console.log('found token: ', this.auth.token);
+      }
+      // this.auth.user = window.localStorage.getItem('user') ? window.localStorage.getItem('user') : this.emptyUser();
     });
   }
 
