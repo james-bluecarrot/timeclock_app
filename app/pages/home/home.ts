@@ -2,25 +2,31 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { Observable } from 'rxjs';
-import { AngularFire } from 'angularfire2';
 
-import { Auth, IUser } from '../../services/auth';
+import { Auth, IUser } from '../../services';
 
 @Component({
-  templateUrl: 'build/pages/home/home.html',
+  templateUrl: 'build/pages/home/home.html'
 })
 export class HomePage {
 
   user: Observable<IUser>;
   isLogin: boolean = false;
 
-  constructor(private af: AngularFire, private auth: Auth) {
+  constructor(private auth: Auth) {
     this.user = this.auth.getUser();
   }
 
+  get displayName() {
+    return this.user.map((user: IUser) => user.displayName);
+  }
+
   googleLogin(credentials) {
-    console.log('test')
-    this.auth.loginWithGoogleUsingWeb().then((res: boolean) => this.isLogin = res);
+    this.auth.loginWithGoogleUsingPlugin().then((res: boolean) => this.isLogin = res);
+  }
+
+  logTime() {
+
   }
 
 }

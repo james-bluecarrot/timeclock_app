@@ -13,11 +13,11 @@
   <button *ngIf="!isLogin" (click)="googleLogin()">Login</button>
 
   <ion-card *ngIf="isLogin">
-    <ion-card-header >
-      {{user.displayName | async}}
+    <ion-card-header>
+      {{ displayName | async }}
     </ion-card-header>
     <ion-card-content>
-      <button secondary>Log Time</button>
+      <button secondary (click)="logTime()">Log Time</button>
     </ion-card-content>
   </ion-card>
 

@@ -9,7 +9,7 @@ import {
 } from 'angularfire2';
 
 import { HomePage } from './pages/home/home';
-import { Auth } from './services/auth';
+import { SERVICES } from './services';
 
 @Component({
   templateUrl: 'build/app.html',
@@ -28,7 +28,7 @@ import { Auth } from './services/auth';
       remember: 'default',
       scope: ['email']
     }),
-    Auth
+    SERVICES
   ]
 })
 class MyApp {
@@ -38,9 +38,8 @@ class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, private auth: Auth) {
+  constructor(public platform: Platform) {
     this.initializeApp();
-
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage }
