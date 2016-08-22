@@ -10,12 +10,11 @@
 
 <ion-content padding class="home">
 
-  <button *ngIf="!user.uid" (click)="googleLogin()">Login with Google Plus</button>
-  <button *ngIf="!user.uid" (click)="googleLogin2()">Login with Google Web</button>  
+  <button *ngIf="!isLogin" (click)="googleLogin()">Login</button>
 
-  <ion-card *ngIf="user.uid">
+  <ion-card *ngIf="isLogin">
     <ion-card-header >
-      {{user.displayName}}
+      {{user.displayName | async}}
     </ion-card-header>
     <ion-card-content>
       <button secondary>Log Time</button>
