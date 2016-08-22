@@ -19,7 +19,7 @@ export class Auth {
   }
 
   getUser() {
-    return this.user$.asObservable();
+    return this.user$;
   }
 
   dispatchUser(user: IUser) {

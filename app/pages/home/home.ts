@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { App, NavController } from 'ionic-angular';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
-import { Auth, IUser } from '../../services';
+import { Auth, IUser, Data, Loader } from '../../services';
 
 @Component({
   templateUrl: 'build/pages/home/home.html'
 })
 export class HomePage {
 
-  user: Observable<IUser>;
+  user: BehaviorSubject<IUser>;
   isLogin: boolean = false;
 
-  constructor(private auth: Auth) {
+  constructor(private auth: Auth, private data: Data, private loader: Loader) {
     this.user = this.auth.getUser();
   }
 
@@ -22,11 +22,18 @@ export class HomePage {
   }
 
   googleLogin(credentials) {
-    this.auth.loginWithGoogleUsingPlugin().then((res: boolean) => this.isLogin = res);
+    this.loader.toggleLoader();
+    this.auth.loginWithGoogleUsingPlugin().then((res: boolean) => {
+      this.isLogin = res;
+      this.loader.toggleLoader();
+    });
   }
 
   logTime() {
-
+    this.loader.toggleLoader();
+    this.data.logTime(this.user.getValue()).then(res => {
+      this.loader.toggleLoader();
+    });
   }
 
 }

@@ -8,11 +8,13 @@ import {
   AuthMethods
 } from 'angularfire2';
 
+import { LoadingModal } from './components/loading-modal/loading-modal';
 import { HomePage } from './pages/home/home';
 import { SERVICES } from './services';
 
 @Component({
   templateUrl: 'build/app.html',
+  directives: [LoadingModal],
   providers: [
     FIREBASE_PROVIDERS,
     // Initialize Firebase app
