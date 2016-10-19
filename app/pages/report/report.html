@@ -1,0 +1,39 @@
+<ion-header>
+	<ion-navbar>
+		<button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Report</ion-title>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="home">
+
+	<ion-list>
+
+		<ion-item>
+			<ion-label fixed>Email</ion-label>
+			<ion-input type="email" #e value=""></ion-input>
+		</ion-item>
+
+    <ion-item>
+			<ion-label fixed>Start Date</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY hh:mm" #sd></ion-datetime>
+		</ion-item>
+
+    <ion-item>
+			<ion-label fixed>End Date</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY hh:mm" #ed></ion-datetime>
+		</ion-item>
+
+    <ion-item>
+      <small #res></small>
+    </ion-item>
+
+
+	</ion-list>
+
+  <button ion-button (click)="sendEmail(e.value, sd, ed, res)">Send Report</button>
+
+</ion-content>
