@@ -24,10 +24,11 @@ export class ReportPage {
   }
 
   sendEmail(email: string, startDate: HTMLElement, endDate: HTMLElement, resEl: HTMLElement) {
-    console.log(email, startDate, endDate);
+    console.log(email, startDate['_text'], endDate['_text']);
     this.loader.toggleLoader();
     this.http.post(this.api, { email: email, startDate: startDate['_text'], endDate: endDate['_text'] }, this.GetHeaders()).subscribe(res => {
-      resEl.innerHTML = res.json();
+      console.log(res);
+      resEl.innerHTML = JSON.stringify(res.json());
       this.loader.toggleLoader();
     });
   }

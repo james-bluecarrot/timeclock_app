@@ -53,7 +53,7 @@ class MyApp {
     ];
     auth.getUser().subscribe((res: IUser) => {
       if (res.email === 'james@bluecarrot.co.nz') {
-        this.pages.push({ title: 'Report', component: ReportPage })
+        this.pages.push({ title: 'Report', component: ReportPage });
       }
     });
 
